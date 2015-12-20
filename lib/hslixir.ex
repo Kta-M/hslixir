@@ -1,6 +1,11 @@
 defmodule Hslixir do
   use Slack
 
+  def init(initial_state, slack) do
+    IO.puts "Connected as #{slack.me.name}"
+    {:ok, initial_state}
+  end
+
   def handle_message(message = %{type: "message", text: _}, slack, state) do
     trigger = String.split(message.text, ~r{ |　})
     case String.starts_with?(message.text, "<@#{slack.me.id}>: ") do
